@@ -41,6 +41,19 @@
           <!-- Dynamically added -->
         </ul>
       </div>
+
+      <div class="widget-stock">
+        <h2>Stock Price Widget</h2>
+    
+        <select id="tickerSelect">
+          <option value="TSLA">Tesla</option>
+          <option value="AAPL">Apple</option>
+          <option value="GOOGL">Google</option>
+          <option value="C">C</option>
+        </select>
+    
+        <canvas id="stockChart" width="800" height="400"></canvas>
+      </div>
     </div>
     
   </div>
@@ -48,5 +61,6 @@
 
 
   <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>

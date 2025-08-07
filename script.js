@@ -103,3 +103,79 @@ async function fetchAndRenderNews() {
 
 // Call the function on load
 fetchAndRenderNews();
+
+const apiBase = "https://c4rm9elh30.execute-api.us-east-1.amazonaws.com/default/cachedPriceData?ticker=";
+
+const tickerSelect = document.getElementById("tickerSelect");
+const ctx = document.getElementById("stockChart").getContext("2d");
+
+let chart;
+
+async function fetchPriceData(ticker) {
+  try {
+    const res = await fetch(`${apiBase}${ticker}`);
+    const data = await res.json();
+
+    const { open, close, volume, timestamp } = data.price_data;
+
+    return {
+      labels: timestamp,
+      datasets: [
+        {
+          label: "Open Price",
+          data: open,
+          borderColor: "blue",
+          backgroundColor: "transparent",
+        },
+        {
+          label: "Close Price",
+          data: close,
+          borderColor: "green",
+          backgroundColor: "transparent",
+        }
+      ]
+    };
+  } catch (err) {
+    console.error("Error fetching price data:", err);
+    return null;
+  }
+}
+
+async function updateChart(ticker) {
+  const chartData = await fetchPriceData(ticker);
+  if (!chartData) return;
+
+  if (chart) {
+    chart.data.labels = chartData.labels;
+    chart.data.datasets = chartData.datasets;
+    chart.update();
+  } else {
+    chart = new Chart(ctx, {
+      type: "line",
+      data: chartData,
+      options: {
+        responsive: true,
+        scales: {
+          x: {
+            title: { display: true, text: "Timestamp" },
+            ticks: {
+              maxTicksLimit: 10,
+              autoSkip: true,
+            }
+          },
+          y: {
+            title: { display: true, text: "Price (USD)" }
+          }
+        }
+      }
+    });
+  }
+}
+
+// Initial render
+updateChart(tickerSelect.value);
+
+// On ticker change
+tickerSelect.addEventListener("change", () => {
+  updateChart(tickerSelect.value);
+});
