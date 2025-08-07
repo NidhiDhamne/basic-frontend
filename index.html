@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Manager</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  
+  <div class="container">
+    <h1>Portfolio Manager</h1>
+    <h2>Homepage</h2>
+    <section class="news-section">
+      <h2>Latest Stock News</h2>
+        <div class="news-carousel" id="news-carousel">
+          <div class="carousel-track" id="carousel-track">
+            <!-- News cards will be injected here -->
+          </div>
+        </div>
+    </section>
+    <div class="stock-blocks">
+      <div class="stock-card" id="high-stocks">
+        <h3>📈 52-Week Highs</h3>
+        <ul id="high-list">
+          <!-- Dynamically added -->
+        </ul>
+      </div>
+    
+      <div class="stock-card" id="low-stocks">
+        <h3>📉 52-Week Lows</h3>
+        <ul id="low-list">
+          <!-- Dynamically added -->
+        </ul>
+      </div>
+    
+      <div class="stock-card" id="volume-stocks">
+        <h3>📊 Volume Surges</h3>
+        <ul id="volume-list">
+          <!-- Dynamically added -->
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
